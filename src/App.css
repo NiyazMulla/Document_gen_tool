@@ -1,38 +1,25 @@
-.App {
+@page Section1 {
+  margin: 0.75in 0.75in 0.75in 0.75in;
+  size: 841.7pt 595.45pt;
+  mso-page-orientation: landscape;
+  mso-header-margin: 0.5in;
+  mso-header: h1;
+  mso-footer-margin: 0.5in;
+  mso-footer: f1;
+}
+
+div.Section1 {
+  page: Section1;
+}
+
+p.headerFooter {
+  margin: 0in;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.jodit-status-bar {
+  visibility: collapse;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.jodit-workplace {
+  min-height: 300px !important;
 }
