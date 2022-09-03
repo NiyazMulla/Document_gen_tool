@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 function TinyMCEEditor(props) {
-  const [initialValue, setInitialValue] = useState("");
+  const [initialValue, setInitialValue] = useState(props.initialValue);
   const editorRef = useRef(null);
 
   useEffect(() => {}, []);

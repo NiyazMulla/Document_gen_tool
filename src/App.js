@@ -1,14 +1,20 @@
 import RichTextEditor from "./components/RichTextEditor";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./App.css";
 import TinyMCEEditor from "./components/TinyMCEEditor";
-
+import SharePoint from "./assets/sharpoint";
+import TemplateData from "./assets/template";
 export default function App() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState();
   const getValue = (value) => {
     setValue(value);
   };
+
+  useEffect(() => {
+    let newString = TemplateData.replace("{{methodology}}", SharePoint);
+    setValue(newString);
+  }, []);
 
   const createTemplate = () => {
     exportDoc(value);
@@ -110,13 +116,22 @@ export default function App() {
           fontSize: "32px",
         }}
       >
-        Document Generate Poc
+        Document Generate
       </div>
 
-      <div>
-        {/* <RichTextEditor initialValue="" getValue={getValue} /> */}
-        <TinyMCEEditor />
-      </div>
+      {/* <div> */}
+      {/* <RichTextEditor initialValue={value} getValue={getValue} /> */}
+      <TinyMCEEditor initialValue={value} />
+      {/* </div> */}
+      {/* <div
+        style={{
+          height: "500px",
+          border: "2px solid red",
+          overflowY: "scroll",
+        }}
+        dangerouslySetInnerHTML={{ __html: value }}
+        contentEditable
+      ></div> */}
       <button
         style={{
           marginTop: "10px",
