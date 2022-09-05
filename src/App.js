@@ -11,10 +11,53 @@ export default function App() {
     setValue(value);
   };
 
+  
   useEffect(() => {
     let newString = TemplateData.replace("{{methodology}}", SharePoint);
-    setValue(newString);
+    var el = document.createElement("html");
+    el.innerHTML = newString;
+    
+    let a = createContentStructure(el.querySelectorAll("h1, h2"));
+    let newString1 = TemplateData.replace("{{tableofcontents}}", a.outerHTML);
+    el.innerHTML = newString1;
+    setValue(newString1);
+    
   }, []);
+
+  const createContentStructure = (list) => {
+    let at = [];
+    list.forEach((ab, index) => {
+      // console.log(ab.querySelector("a:last-child"));
+      if (ab.tagName === "H1") {
+        at.push({ text: ab.innerText, type: ab.tagName, childrens: [] });
+      } else {
+        let ap = at[at.length - 1].childrens;
+        ap.push({
+          text: ab.innerText,
+          type: ab.tagName,
+        });
+        at[at.length - 1] = {...at[at.length - 1],childrens : ap};
+      }
+    });
+    let ae  = document.createElement('ul');
+    at.forEach((j,l) => {
+      let li  = document.createElement('li');
+      let text = document.createTextNode(j.text);
+      li.appendChild(text);
+      if(j.childrens.length){
+        let aec  = document.createElement('ul');
+        j.childrens.forEach((jc,lc) => {
+          let lic  = document.createElement('li');
+          let textc = document.createTextNode(jc.text);
+          lic.appendChild(textc);
+          aec.appendChild(lic);
+        })
+        li.appendChild(aec);
+      }
+      ae.appendChild(li);
+    })
+    return ae;
+  };
 
   const createTemplate = () => {
     exportDoc(value);
